@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import BOTH,IntVar,DISABLED,filedialog
+from tkinter import BOTH,IntVar,DISABLED,filedialog,ANCHOR
 
 root = tkinter.Tk()
 root.title("Color Theme")
@@ -120,6 +120,11 @@ def save_colors():
         for saved_entry in stored_colors.values():
             f.write(saved_entry[0] + "\n" + saved_entry[1] + "\n\n") 
 
+def remove_item():
+    """Remove the selected item from remove bar"""
+    color_box.delete(ANCHOR)
+
+
 #Define Layout
 input_frame = tkinter.LabelFrame(root,padx=5,pady=5)
 output_frame = tkinter.LabelFrame(root,padx=5,pady=5)
@@ -149,7 +154,7 @@ magneta_button = tkinter.Button(input_frame,text="Magneta",command=lambda:set_co
 store_button = tkinter.Button(input_frame,text="Store Color",command=store_color)
 save_button = tkinter.Button(input_frame,text="Save",command=save_colors)
 quit_button = tkinter.Button(input_frame,text="Quit",command = root.destroy)
-
+delete_button = tkinter.Button(input_frame,text="Reset",command=lambda:set_color(0,0,0))
 #Put labels slider on frame.....Use ipadx to define column width
 red_label.grid(row=0,column=0,sticky="W")
 red_slider.grid(row=1,column=0,sticky="W")
@@ -166,10 +171,11 @@ yellow_button.grid(row=3,column=0,padx=1,pady=1,sticky="WE")
 cyan_button.grid(row=3,column=1,padx=1,pady=1,sticky="WE")
 magneta_button.grid(row=3,column=2,padx=1,pady=1,sticky="WE")
 
-store_button.grid(row=4,column=0,columnspan=3,padx=1,pady=1,sticky="WE")
+store_button.grid(row=4,column=0,columnspan=2,padx=1,pady=1,sticky="WE")
 save_button.grid(row=4,column=3,padx=1,pady=1,sticky="WE")
 quit_button.grid(row=4,column=4,padx=1,pady=1,sticky="WE")
 
+delete_button.grid(row=4,column=2,padx=1,pady=1,sticky="WE")
 
 
 #Create The Color box and color layout
